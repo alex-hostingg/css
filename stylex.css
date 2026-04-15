@@ -1,0 +1,199 @@
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --primary: #2593e8;
+            --fb-color: #1877f2;
+            --google-blue: #1a73e8;
+            --text-main: #1c1e21;
+            --text-sub: #65676b;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+            --radius: 8px;
+        }
+
+        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; top: 0; z-index: 50;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 24px; color: var(--text-main); }
+        .brand i { color: var(--primary); }
+        
+        .nav-btns { display: flex; gap: 10px; }
+        .btn {
+            padding: 10px 20px; border-radius: 50px; border: none;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        .btn-ghost { background: transparent; color: var(--text-main); }
+        .btn-ghost:hover { background: rgba(0,0,0,0.05); }
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 15px rgba(37, 147, 232, 0.3); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* --- CONTENT AREA --- */
+        .hero { max-width: 1000px; margin: 40px auto; padding: 0 20px; text-align: center; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--text-main); }
+
+        .card-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+            max-width: 900px; margin: 0 auto; padding: 0 20px;
+        }
+        @media (max-width: 768px) { .card-container { grid-template-columns: 1fr; } }
+
+        .main-card {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-soft);
+            display: flex; flex-direction: column; gap: 20px;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .file-preview {
+            background: #f8f9fa; border-radius: 12px; padding: 20px;
+            display: flex; align-items: center; gap: 20px;
+        }
+        .file-icon-large { width: 80px; height: 80px; object-fit: contain; }
+        
+        .btn-download-large {
+            width: 100%;
+            background: linear-gradient(45deg, #2593e8, #1a6eb0);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 18px; font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(37, 147, 232, 0.4);
+        }
+        .btn-download-large:hover { transform: translateY(-3px); }
+
+        /* --- MODAL OVERLAY --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            display: none;
+            align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+
+        /* --- COMBO LOGIN POPUP --- */
+        .popup-login-container {
+            background: #fff;
+            width: 90%; max-width: 450px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-overlay.active .popup-login-container { transform: scale(1); }
+
+        /* Tab Navigation */
+        .login-tabs {
+            display: flex; background: #f0f2f5; border-bottom: 1px solid #ddd;
+        }
+        .tab-item {
+            flex: 1; text-align: center; padding: 15px;
+            cursor: pointer; font-weight: 600; font-size: 15px;
+            color: #65676b; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .tab-item:hover { background: #e4e6eb; }
+        .tab-item.active {
+            background: #fff; color: #1877f2;
+            border-top: 3px solid #1877f2;
+        }
+        
+        /* Content Area */
+        .login-content { padding: 30px 25px; min-height: 320px; position: relative; }
+        
+        .login-form-view { display: none; animation: fadeIn 0.3s; }
+        .login-form-view.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Header inside Modal */
+        .modal-header { text-align: center; margin-bottom: 20px; }
+        .modal-title { font-size: 20px; font-weight: 700; color: #1c1e21; }
+        .modal-sub { font-size: 14px; color: #606770; }
+
+        /* --- FACEBOOK STYLES --- */
+        .input-group { margin-bottom: 15px; position: relative; }
+        .input-field {
+            width: 100%; padding: 14px 16px; padding-right: 45px; /* Extra padding for icon */
+            border: 1px solid #dddfe2;
+            border-radius: 6px; font-size: 16px; color: #1c1e21;
+            transition: 0.2s;
+        }
+        .input-field:focus { border-color: #1877f2; box-shadow: 0 0 0 2px #e7f3ff; }
+
+        .fb-btn-submit {
+            width: 100%; background: #1877f2; color: #fff; border: none;
+            padding: 12px; border-radius: 6px; font-size: 16px; font-weight: bold;
+            cursor: pointer; margin-top: 5px;
+        }
+        .fb-btn-submit:hover { background: #166fe5; }
+        .fb-links { text-align: center; margin-top: 15px; font-size: 14px; }
+        .fb-links a { color: #1877f2; text-decoration: none; }
+
+        /* --- GOOGLE STYLES --- */
+        .google-logo-center { width: 50px; margin: 0 auto 10px; display: block; }
+        
+        /* Google Input with Icon */
+        .g-input-wrapper {
+            position: relative;
+            margin-bottom: 25px; /* Jarak antar input */
+            display: flex;
+            align-items: center;
+        }
+        .g-input-field {
+            width: 100%; padding: 13px 45px 13px 15px; /* Padding kanan untuk ikon mata */
+            border: none; border-bottom: 1px solid #dadce0;
+            font-size: 16px; border-radius: 4px 4px 0 0;
+            background: transparent;
+        }
+        .g-input-field:focus { border-bottom: 2px solid #1a73e8; }
+        
+        /* Icon Style General */
+        .input-icon {
+            position: absolute; right: 10px;
+            color: #5f6368; cursor: pointer;
+            font-size: 18px; background: none; border: none;
+            z-index: 10;
+        }
+        .input-icon:hover { color: #202124; }
+
+        .g-btn-submit {
+            background: #1a73e8; color: white; border: none; padding: 10px 24px;
+            border-radius: 4px; font-weight: 500; cursor: pointer; float: right;
+        }
+        .g-btn-submit:hover { background: #1765cc; }
+        .g-forgot { color: #1a73e8; font-size: 14px; cursor: pointer; display: block; text-align: left; margin-top: -20px; margin-bottom: 20px;}
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 13px; }
+        .g-footer-text { font-size: 12px; color: #5f6368; line-height: 1.5; margin-top: 10px; }
+        .g-footer-link { color: var(--google-blue); text-decoration: none; cursor: pointer; }
+        .g-footer-link:hover { text-decoration: underline; }
+                  
